@@ -22,11 +22,27 @@ h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:.0
 .top{display:grid;gap:14px}
 .top h1{font-size:clamp(26px,4.6vw,40px);line-height:1;text-transform:uppercase}
 .top h1 span{color:var(--volt)}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tab{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;border:1px solid var(--line);border-radius:4px;background:var(--panel);color:var(--fg-2);cursor:pointer;display:flex;gap:10px;align-items:baseline}
-.tab small{font-family:var(--body);font-weight:500;letter-spacing:0;text-transform:none;color:var(--fg-3)}
-.tab.on{background:var(--volt);color:#031018;border-color:var(--volt)} .tab.on small{color:#0b3a4a}
-.tab:focus-visible{outline:2px solid var(--volt);outline-offset:2px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--panel)}
+.tab{font-family:var(--display);text-align:left;padding:12px 16px;border:0;border-right:1px solid var(--line);background:transparent;color:var(--fg-2);cursor:pointer;display:grid;gap:3px;position:relative;min-width:0}
+.tab:last-child{border-right:0}
+.tab .st{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-3)}
+.tab .nm{font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg)}
+.tab .bl{font-family:var(--body);font-size:12px;color:var(--fg-3);display:flex;gap:6px;align-items:baseline}
+.tab .bl b{font-family:var(--display);font-size:15px;color:var(--fg-2)}
+.tab::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:transparent;transition:background .25s}
+.tab:hover{background:var(--panel-2)}
+.tab.on{background:linear-gradient(180deg,rgba(25,211,255,.12),rgba(25,211,255,.04))} .tab.on::after{background:var(--volt)} .tab.on .st{color:var(--volt)} .tab.on .bl b{color:var(--volt)}
+.tab:focus-visible{outline:2px solid var(--volt);outline-offset:-2px}
+.drivers{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.drivers .lbl{font-family:var(--display);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-3);margin-right:4px}
+.dchip{display:inline-flex;gap:7px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.02em;padding:5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel);cursor:pointer;color:var(--fg-2);font-family:var(--body);text-transform:none}
+.dchip i{width:9px;height:9px;border-radius:50%;flex:none}
+.dchip:hover{border-color:var(--fg-3)} .dchip.on{color:#031018;border-color:transparent}
+.spot{display:inline-flex;gap:8px;align-items:center;font-size:12px;color:var(--fg-2);margin-top:10px}
+.spot i{width:10px;height:10px;border-radius:2px}
+.row,.results tr,.step .name{cursor:pointer}
+.results tr:hover td{background:var(--panel-2)}
+@media (max-width:560px){.tabs{grid-template-columns:1fr}.tab{border-right:0;border-bottom:1px solid var(--line)}.tab:last-child{border-bottom:0}}
 /* hero */
 .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:stretch}
 .hero-card{background:linear-gradient(135deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:6px;padding:22px 24px;position:relative;overflow:hidden}
@@ -71,7 +87,7 @@ input[type=range]{width:100%;accent-color:var(--volt);margin-top:6px}
 .tower-head{display:grid;grid-template-columns:28px 1fr 46px 64px;gap:6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);padding:0 8px 6px;border-bottom:1px solid var(--line)}
 .rows{position:relative;height:calc(11 * 34px)}
 .row{position:absolute;left:0;right:0;height:30px;display:grid;grid-template-columns:28px 1fr 46px 64px;gap:6px;align-items:center;padding:0 8px;border-radius:3px;background:var(--panel-2);transition:top .6s cubic-bezier(.2,.8,.2,1),background .3s;font-size:13px}
-.row.you{background:#0f2a3a;box-shadow:inset 3px 0 0 var(--volt)}
+.row.you{background:var(--panel);outline:1px solid var(--line)}
 .row .pos{font-family:var(--display);font-weight:700;color:var(--fg-2)}
 .row .drv{display:flex;gap:8px;align-items:center;min-width:0;font-weight:600;letter-spacing:.02em}
 .row .drv i{width:10px;height:10px;border-radius:2px;flex:none}
@@ -98,7 +114,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .results{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
 .results th{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line);font-weight:600}
 .results td{padding:6px;border-bottom:1px solid var(--line)} .results td.r,.results th.r{text-align:right}
-.results tr.you td{background:#0f2a3a} .results td i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px;vertical-align:middle}
+.results tr.you td{background:var(--panel-2);font-weight:600} .results td i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px;vertical-align:middle}
 .tbl{overflow-x:auto}
 @media (max-width:820px){.hero,.replay,.grid2{grid-template-columns:1fr}.rows{height:calc(11 * 32px)}.row{height:28px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -110,7 +126,8 @@ svg{display:block;width:100%;height:auto;overflow:visible}
       <div class="eyebrow">Afterwork · 28 Oct 2026 · Practice → Qualifying → Race</div>
       <h1 style="margin-top:6px">Afterwork E-Prix Weekend<br><span>Three sessions, three wins</span></h1>
     </div>
-    <nav class="tabs" id="tabs"></nav>
+    <nav class="tabs" id="tabs" aria-label="Session"></nav>
+    <div class="drivers" id="drivers"><span class="lbl">Spotlight</span></div>
   </header>
 
   <section class="panel" id="weekendPanel">
@@ -124,6 +141,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
       <div class="eyebrow" id="hEyebrow"></div>
       <h2 id="hTitle"></h2>
       <div class="sub" id="hSub"></div>
+      <div class="spot" id="spot"></div>
       <div class="kpis">
         <div class="kpi purple"><b class="num" id="kpiBest">0.000</b><small id="kpiBestL"></small></div>
         <div class="kpi volt"><b class="num" id="kpiGap">0.000</b><small id="kpiGapL"></small></div>
@@ -165,7 +183,7 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 
   <div class="grid2">
     <section class="panel">
-      <div class="panel-head"><h3>Your lap deltas</h3><p class="note" id="deltaNote"></p></div>
+      <div class="panel-head"><h3 id="deltaTitle">Your lap deltas</h3><p class="note" id="deltaNote"></p></div>
       <div id="deltaChart"></div>
       <div class="tip" id="tip2"></div>
     </section>
@@ -243,10 +261,13 @@ const S={
   replayNote:"SPD3B configuration: the inner middle lane and inner right-hand lane (the greyed lane is the SPD3 route). A real race: 15 laps, karts move by their actual lap times, so the tower is the live classification."},
 };
 const ORDER=["practice","qualifying","race"];
-Object.values(S).forEach(s=>{s.D=Object.entries(s.laps).map(([n,l])=>({n,k:KART[n],c:COL[n],you:n==="EINFACHDEEKS",l,cum:l.reduce((a,t)=>(a.push((a[a.length-1]||0)+t),a),[]),best:Math.min(...l),avg:s.avg?s.avg[n]:+(l.reduce((a,b)=>a+b,0)/l.length).toFixed(3)}));
+Object.values(S).forEach(s=>{s.D=Object.entries(s.laps).map(([n,l])=>({n,k:KART[n],c:COL[n],you:false,l,cum:l.reduce((a,t)=>(a.push((a[a.length-1]||0)+t),a),[]),best:Math.min(...l),avg:s.avg?s.avg[n]:+(l.reduce((a,b)=>a+b,0)/l.length).toFixed(3)}));
   s.D.forEach(d=>d.total=d.cum[d.cum.length-1]);s.TOTAL=Math.max(...s.D.map(d=>d.total));
   if(s.isRace){s.D=s.result.map(r=>Object.assign(s.D.find(d=>d.n===r.n),{gap:r.gap}))}else{s.D.sort((a,b)=>a.best-b.best);const b=s.D[0].best;s.D.forEach((d,i)=>d.gap=i?"+"+(d.best-b).toFixed(3):"")}
 });
+let FOCUS="EINFACHDEEKS";const ME="EINFACHDEEKS";
+const rgb=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)).join(",");
+function setFocus(n){if(!COL[n])return;FOCUS=n;document.querySelectorAll(".dchip").forEach(c=>{const on=c.dataset.n===n;c.classList.toggle("on",on);c.style.background=on?COL[n]:""});slopeChart();if(cur)render(cur.id,true)}
 const fmt=t=>t>=60?`${Math.floor(t/60)}:${(t%60).toFixed(3).padStart(6,"0")}`:t.toFixed(3);
 const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const NS="http://www.w3.org/2000/svg",el=(t,a={})=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
@@ -255,7 +276,7 @@ function countUp(e,to,dur){const t0=performance.now();(function f(now){const p=r
 function tipAt(tip,box,e,w){const pr=box.getBoundingClientRect();tip.style.left=Math.max(0,Math.min(e.clientX-pr.left+12,pr.width-w))+"px";tip.style.top=(e.clientY-pr.top+10)+"px";tip.style.display="block"}
 
 /* ---------- weekend slope chart ---------- */
-(function(){
+function slopeChart(){$("slope").innerHTML="";
   const cw=900,ch=300,m={l:48,r:185,t:18,b:28},pw=cw-m.l-m.r,ph=ch-m.t-m.b,Y0=32,Y1=48;
   const X=i=>m.l+i/2*pw,Y=v=>m.t+(1-(Math.min(v,Y1)-Y0)/(Y1-Y0))*ph;
   const svg=el("svg",{viewBox:`0 0 ${cw} ${ch}`,role:"img","aria-label":"Best lap per session per driver"});
@@ -267,18 +288,20 @@ function tipAt(tip,box,e,w){const pr=box.getBoundingClientRect();tip.style.left=
   const GAP=14;let last=-99;labels.forEach(o=>{let y=Y(o.v);if(y-last<GAP)y=last+GAP;o.y=y;last=y});
   const over=labels[labels.length-1].y-(m.t+ph-4);if(over>0){labels.forEach(o=>o.y-=over);let nxt=1e9;for(let i=labels.length-1;i>=0;i--){if(nxt-labels[i].y<GAP)labels[i].y=nxt-GAP;nxt=labels[i].y}}
   names.slice().reverse().forEach(n=>{
-    const vals=ORDER.map(k=>Math.min(...S[k].laps[n]));const you=n==="EINFACHDEEKS";
+    const vals=ORDER.map(k=>Math.min(...S[k].laps[n]));const you=n===FOCUS;
     const p=el("path",{d:vals.map((v,i)=>`${i?"L":"M"}${X(i)} ${Y(v)}`).join(" "),fill:"none",stroke:COL[n],"stroke-width":you?3.5:1.6,opacity:you?1:.55,"stroke-linecap":"round","stroke-linejoin":"round"});
     if(!reduced){p.style.strokeDasharray=900;p.style.strokeDashoffset=900;p.style.transition="stroke-dashoffset 1.6s ease-out";requestAnimationFrame(()=>requestAnimationFrame(()=>p.style.strokeDashoffset=0))}
     svg.appendChild(p);
     vals.forEach((v,i)=>{const c=el("circle",{cx:X(i),cy:Y(v),r:you?6:4,fill:COL[n],stroke:"#0d1424","stroke-width":2});c.style.cursor="pointer";
-      const show=e=>{$("tip0").innerHTML=`<b>${n}</b> · ${S[ORDER[i]].tab}<br>best ${fmt(v)}`;tipAt($("tip0"),$("weekendPanel"),e,200)};c.addEventListener("pointermove",show);c.addEventListener("pointerdown",show);c.addEventListener("pointerleave",()=>$("tip0").style.display="none");svg.appendChild(c)});
+      const show=e=>{$("tip0").innerHTML=`<b>${n}</b> · ${S[ORDER[i]].tab}<br>best ${fmt(v)} · click to spotlight`;tipAt($("tip0"),$("weekendPanel"),e,200)};c.addEventListener("pointermove",show);c.addEventListener("pointerdown",show);c.addEventListener("pointerleave",()=>$("tip0").style.display="none");c.addEventListener("click",()=>setFocus(n));svg.appendChild(c)});
     const o=labels.find(x=>x.n===n);svg.appendChild(el("line",{x1:X(2)+5,x2:X(2)+14,y1:Y(vals[2]),y2:o.y,stroke:COL[n],"stroke-width":1,opacity:.6}));
     const t=el("text",{x:X(2)+18,y:o.y+3.5,fill:you?"#f2f6ff":"#9fb0cc","font-size":10.5,"font-family":"Barlow","font-weight":you?600:400});t.textContent=n;svg.appendChild(t);
-    const tv=el("text",{x:cw-4,y:o.y+3.5,fill:you?"#19d3ff":"#5f7093","font-size":10.5,"text-anchor":"end","font-family":"Barlow","font-weight":600});tv.setAttribute("class","num");tv.textContent=fmt(vals[2]);svg.appendChild(tv);
+    const tv=el("text",{x:cw-4,y:o.y+3.5,fill:you?COL[n]:"#5f7093","font-size":10.5,"text-anchor":"end","font-family":"Barlow","font-weight":600});tv.setAttribute("class","num");tv.textContent=fmt(vals[2]);svg.appendChild(tv);
+    [t,tv].forEach(x=>{x.style.cursor="pointer";x.addEventListener("click",()=>setFocus(n))});
   });
   $("slope").appendChild(svg);
-})();
+}
+slopeChart();
 
 /* ---------- track geometry ---------- */
 /* Traced from the Afterwork circuit board (image px), direction of travel: east over the start/finish line,
@@ -340,7 +363,7 @@ function drawKarts(T){
   const order=s.D.map(d=>({d,p:progress(d,T)})).sort((a,b)=>(b.p.lap+b.p.frac)-(a.p.lap+a.p.frac)||(a.d.total-b.d.total));
   [...order].reverse().forEach(({d,p})=>{
     const f=p.done?0:p.frac;const q=P(posAt(p.lap+f));
-    if(d.you){cx.shadowColor=d.c;cx.shadowBlur=24;for(let k=1;k<=10;k++){const q2=P(posAt(p.lap+f-k*0.012));cx.beginPath();cx.arc(q2[0],q2[1],9-k*.7,0,7);cx.fillStyle=`rgba(25,211,255,${0.22-k*0.02})`;cx.fill()}}
+    if(d.you){cx.shadowColor=d.c;cx.shadowBlur=24;const rc=rgb(d.c);for(let k=1;k<=10;k++){const q2=P(posAt(p.lap+f-k*0.012));cx.beginPath();cx.arc(q2[0],q2[1],9-k*.7,0,7);cx.fillStyle=`rgba(${rc},${0.22-k*0.02})`;cx.fill()}}
     cx.beginPath();cx.arc(q[0],q[1],d.you?11:8.5,0,7);cx.fillStyle=d.c;cx.fill();
     cx.shadowBlur=0;cx.lineWidth=2;cx.strokeStyle="#070b14";cx.stroke();
     cx.fillStyle="#070b14";cx.font=`700 ${d.you?11:9}px Chakra Petch, sans-serif`;cx.textAlign="center";cx.textBaseline="middle";cx.fillText(d.k,q[0],q[1]+.5);
@@ -361,22 +384,28 @@ document.querySelectorAll("[data-speed]").forEach(b=>b.onclick=()=>{speed=+b.dat
 scrub.oninput=()=>{T=scrub.value/1000*cur.TOTAL};
 
 /* ---------- per-session render ---------- */
-function render(key){
-  const s=S[key];cur=s;T=0;setPlay(!reduced);if(reduced)T=s.TOTAL;G=GEOM[s.track]||GEOM.SPD3;pts=G.pts;
+function render(key,keepT){
+  const s=S[key];const wasT=T,wasPlaying=playing;cur=s;G=GEOM[s.track]||GEOM.SPD3;pts=G.pts;
+  if(keepT){T=Math.min(wasT,s.TOTAL);setPlay(wasPlaying)}else{T=0;setPlay(!reduced);if(reduced)T=s.TOTAL}
+  s.D.forEach(d=>d.you=d.n===FOCUS);
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",t.dataset.key===key));
-  const you=s.D.find(d=>d.you),p2=s.D[1];
+  const you=s.D.find(d=>d.you),p1=s.D[0],pos=s.D.indexOf(you)+1,isMe=FOCUS===ME;
+  document.documentElement.style.setProperty("--volt",you.c);
   $("hEyebrow").textContent=`${s.label} · ${s.time} · ${s.track} · ${s.kind}`;
-  $("hTitle").innerHTML=`${s.title[0]}<br><span>${s.title[1]}</span>`;
+  $("hTitle").innerHTML=isMe?`${s.title[0]}<br><span>${s.title[1]}</span>`:`${s.title[0]}<br><span>${you.n} · P${pos}</span>`;
   $("hSub").textContent=`${s.D.length} drivers · ${Math.round(s.TOTAL)} s of running · ${s.isRace?"15-lap race, classified by finishing order":"classified by best lap"}`;
+  $("spot").innerHTML=`<i style="background:${you.c}"></i>Spotlight on <b style="color:var(--fg)">${you.n}</b> · kart ${you.k} · click any driver name to switch`;
   countUp($("kpiBest"),you.best,1400);$("kpiBestL").textContent=`Best lap · lap ${you.l.indexOf(you.best)+1}`;
-  countUp($("kpiGap"),s.isRace?23.549:p2.best-you.best,1400);$("kpiGapL").textContent=s.isRace?"Win margin at the flag":"Margin to P2";
-  $("kpiLaps").textContent=you.l.length;$("kpiLapsL").textContent=s.isRace?"Laps · lapped 8 of 10 rivals":`Laps · avg ${you.avg.toFixed(3)}`;
+  if(pos===1){countUp($("kpiGap"),s.isRace?23.549:s.D[1].best-you.best,1400);$("kpiGapL").textContent=s.isRace?"Win margin at the flag":"Margin to P2"}
+  else{const g=s.isRace&&/^\+[\d.]+$/.test(you.gap)?+you.gap.slice(1):you.best-p1.best;countUp($("kpiGap"),g,1400);$("kpiGapL").textContent=s.isRace&&/^\+[\d.]+$/.test(you.gap)?"Behind the winner":s.isRace?`Best-lap gap to P1 · ${you.gap}`:"Best-lap gap to P1"}
+  $("kpiLaps").textContent=you.l.length;$("kpiLapsL").textContent=s.isRace&&isMe?"Laps · lapped 8 of 10 rivals":`Laps · avg ${you.avg.toFixed(3)}`;
   // podium
-  const st=$("steps");st.innerHTML="";[["p2",1],["p1",0],["p3",2]].forEach(([c,i])=>{const d=s.D[i];st.insertAdjacentHTML("beforeend",`<div class="step ${c}"><div class="name">${d.n}</div><div class="lap num">${fmt(d.best)} · kart ${d.k}</div><div class="block">${i+1}</div></div>`)});
+  const st=$("steps");st.innerHTML="";[["p2",1],["p1",0],["p3",2]].forEach(([c,i])=>{const d=s.D[i];st.insertAdjacentHTML("beforeend",`<div class="step ${c}"><div class="name" data-n="${d.n}" style="${d.you?"color:"+d.c:""}">${d.n}</div><div class="lap num">${fmt(d.best)} · kart ${d.k}</div><div class="block" style="${d.you?"color:"+d.c+";border-color:"+d.c:""}">${i+1}</div></div>`)});
+  st.querySelectorAll(".name").forEach(n=>n.onclick=()=>setFocus(n.dataset.n));
   // replay
   $("replayTitle").textContent=s.isRace?"Race replay":s.kind+" replay";$("replayNote").textContent=s.replayNote;
   const rowsEl=$("rows");rowsEl.innerHTML="";rowEls={};
-  s.D.forEach(d=>{const r=document.createElement("div");r.className="row"+(d.you?" you":"");r.innerHTML=`<span class="pos"></span><span class="drv"><i style="background:${d.c}"></i><span>${d.n}</span></span><span class="lp num"></span><span class="tm num"></span>`;rowsEl.appendChild(r);rowEls[d.n]=r});
+  s.D.forEach(d=>{const r=document.createElement("div");r.className="row"+(d.you?" you":"");r.innerHTML=`<span class="pos"></span><span class="drv"><i style="background:${d.c}"></i><span>${d.n}</span></span><span class="lp num"></span><span class="tm num"></span>`;if(d.you)r.style.boxShadow=`inset 3px 0 0 ${d.c}`;r.onclick=()=>setFocus(d.n);rowsEl.appendChild(r);rowEls[d.n]=r});
   lapChart(s);deltaChart(s,you);ladder(s);table(s);
 }
 function lapChart(s){
@@ -396,7 +425,7 @@ function lapChart(s){
     svg.appendChild(p);paths[d.n]=p;
     d.l.forEach((v,i)=>{if(v>Y1){const t=el("text",{x:X(i),y:Y(v)-6,fill:d.c,"font-size":10,"text-anchor":"middle","font-family":"Barlow"});t.textContent="▲ "+fmt(v);svg.appendChild(t)}});
   });
-  const you=s.D.find(d=>d.you);you.l.forEach((v,i)=>svg.appendChild(el("circle",{cx:X(i),cy:Y(v),r:v===you.best?6:4,fill:v===you.best?"#c86bff":"#19d3ff",stroke:"#0d1424","stroke-width":2})));
+  const you=s.D.find(d=>d.you);you.l.forEach((v,i)=>svg.appendChild(el("circle",{cx:X(i),cy:Y(v),r:v===you.best?6:4,fill:v===you.best?"#c86bff":you.c,stroke:"#0d1424","stroke-width":2})));
   const cursor=el("line",{y1:m.t,y2:m.t+ph,stroke:"#9fb0cc","stroke-width":1,opacity:0});svg.appendChild(cursor);
   const hit=el("rect",{x:m.l,y:m.t,width:pw,height:ph,fill:"transparent"});svg.appendChild(hit);box.appendChild(svg);
   const move=e=>{const r=svg.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*cw;const i=Math.max(0,Math.min(N-1,Math.round((px-m.l)/pw*(N-1))));cursor.setAttribute("x1",X(i));cursor.setAttribute("x2",X(i));cursor.setAttribute("opacity",.6);
@@ -404,17 +433,18 @@ function lapChart(s){
     tip.innerHTML=`<b>Lap ${i+1}</b><div style="margin-top:4px;display:grid;gap:2px">${rows}</div>`;tipAt(tip,box.parentElement,e,240)};
   hit.addEventListener("pointermove",move);hit.addEventListener("pointerdown",move);hit.addEventListener("pointerleave",()=>{tip.style.display="none";cursor.setAttribute("opacity",0)});
   let sel=null;const leg=$("legend");
-  s.D.forEach(d=>{const c=document.createElement("button");c.className="chip";c.innerHTML=`<i style="background:${d.c}"></i>${d.n} <span class="num" style="color:var(--fg-3)">${fmt(d.best)}</span>`;c.onclick=()=>{sel=sel===d.n?null:d.n;leg.querySelectorAll(".chip").forEach(x=>x.classList.toggle("sel",x===c&&sel));s.D.forEach(x=>{paths[x.n].setAttribute("opacity",sel?(x.n===sel?1:.12):(x.you?1:.55));paths[x.n].setAttribute("stroke-width",sel===x.n||(!sel&&x.you)?3:1.6)})};leg.appendChild(c)});
+  s.D.forEach(d=>{const c=document.createElement("button");c.className="chip";c.innerHTML=`<i style="background:${d.c}"></i>${d.n} <span class="num" style="color:var(--fg-3)">${fmt(d.best)}</span>`;c.onclick=()=>setFocus(d.n);c.onpointerenter=()=>{s.D.forEach(x=>{paths[x.n].setAttribute("opacity",x.n===d.n?1:.12)})};c.onpointerleave=()=>{s.D.forEach(x=>{paths[x.n].setAttribute("opacity",x.you?1:.55)})};if(d.you)c.classList.add("sel");leg.appendChild(c)});
 }
 function deltaChart(s,you){
-  const box=$("deltaChart"),tip=$("tip2");box.innerHTML="";$("deltaNote").textContent=s.deltaNote;
+  const box=$("deltaChart"),tip=$("tip2");box.innerHTML="";$("deltaNote").textContent=FOCUS===ME?s.deltaNote:`${you.n}'s laps vs their ${fmt(you.best)} best (lap ${you.l.indexOf(you.best)+1}).`;
+  $("deltaTitle").textContent=FOCUS===ME?"Your lap deltas":`${you.n} · lap deltas`;
   const N=you.l.length,cw=480,ch=260,m={l:40,r:10,t:14,b:26},pw=cw-m.l-m.r,ph=ch-m.t-m.b;
   const max=Math.ceil(Math.max(...you.l.map(v=>v-you.best))/4)*4||4;
   const svg=el("svg",{viewBox:`0 0 ${cw} ${ch}`,role:"img","aria-label":"Your lap deltas to best"});
   for(let v=0;v<=max;v+=4){const y=m.t+ph-(v/max)*ph;svg.appendChild(el("line",{x1:m.l,x2:cw-m.r,y1:y,y2:y,stroke:"#1d2a44"}));const t=el("text",{x:m.l-8,y:y+4,fill:"#5f7093","font-size":11,"text-anchor":"end","font-family":"Barlow"});t.textContent="+"+v;svg.appendChild(t)}
   const bw=pw/N;
   you.l.forEach((v,i)=>{const d=v-you.best,h=Math.max(3,(d/max)*ph),x=m.l+i*bw+3,y=m.t+ph-h;
-    const col=d===0?"#c86bff":d<1.2?"#4ee07a":d<5?"#19d3ff":d<10?"#ffc247":"#ff5a6a";
+    const col=d===0?"#c86bff":d<1.2?"#4ee07a":d<5?you.c:d<10?"#ffc247":"#ff5a6a";
     const r=el("rect",{x,y,width:bw-6,height:h,rx:3,fill:col});
     if(!reduced){r.style.transformOrigin=`0 ${m.t+ph}px`;r.style.transform="scaleY(0)";r.style.transition=`transform .9s ${i*0.05}s cubic-bezier(.2,.8,.2,1)`;requestAnimationFrame(()=>requestAnimationFrame(()=>r.style.transform="scaleY(1)"))}
     svg.appendChild(r);
@@ -422,20 +452,28 @@ function deltaChart(s,you){
     const show=e=>{tip.innerHTML=`<b>Lap ${i+1}</b> · ${fmt(v)}<br>${d===0?"Best lap":"+"+d.toFixed(3)+" s to best"}`;tipAt(tip,box.parentElement,e,170)};
     r.addEventListener("pointermove",show);r.addEventListener("pointerdown",show);r.addEventListener("pointerleave",()=>tip.style.display="none")});
   box.appendChild(svg);
-  box.insertAdjacentHTML("beforeend",`<p class="note" style="margin-top:8px"><span style="color:var(--purple)">■</span> best &nbsp;<span style="color:var(--green)">■</span> &lt;1.2 s &nbsp;<span style="color:var(--volt)">■</span> &lt;5 s &nbsp;<span style="color:var(--amber)">■</span> &lt;10 s &nbsp;<span style="color:var(--red)">■</span> 10 s+</p>`);
+  box.insertAdjacentHTML("beforeend",`<p class="note" style="margin-top:8px"><span style="color:var(--purple)">■</span> best &nbsp;<span style="color:var(--green)">■</span> &lt;1.2 s &nbsp;<span style="color:${you.c}">■</span> &lt;5 s &nbsp;<span style="color:var(--amber)">■</span> &lt;10 s &nbsp;<span style="color:var(--red)">■</span> 10 s+</p>`);
 }
 function ladder(s){
-  const you=s.D.find(d=>d.you);$("ladderTitle").textContent=`Where ${fmt(you.best)} sits`;$("ladderNote").textContent=s.ladderNote;
-  const rec=s.ladder[0].v,L=$("ladder");L.innerHTML="";
-  s.ladder.forEach((r,i)=>L.insertAdjacentHTML("beforeend",`<div class="r ${r.cls||""}"><span class="k">${r.k}</span><div class="bar"><i style="width:${(rec/r.v*100).toFixed(1)}%;animation-delay:${i*0.1}s"></i></div><span class="v num">${fmt(r.v)} <small>${r.n}</small></span></div>`));
+  const you=s.D.find(d=>d.you);$("ladderTitle").textContent=`Where ${fmt(you.best)} sits`;
+  const me=s.D.find(d=>d.n===ME);let rows=s.ladder,note=s.ladderNote;
+  if(FOCUS!==ME){const i=s.D.indexOf(you);rows=[s.ladder[0],s.ladder[1],{k:"Session P1",n:s.D[0].n,v:s.D[0].best},i>1?{k:"P"+i,n:s.D[i-1].n,v:s.D[i-1].best}:null,{k:"P"+(i+1),n:you.n,v:you.best,cls:"you"},s.D[i+1]?{k:"P"+(i+2),n:s.D[i+1].n,v:s.D[i+1].best}:null].filter(Boolean);
+    note=`${you.n} was ${(you.best-s.D[0].best).toFixed(3)} s off the session's best lap and ${(you.best-rows[0].v).toFixed(3)} s off the ${s.track} record. Weekly and all-time rankings from the timing emails are only available for ${ME}.`}
+  $("ladderNote").textContent=note;
+  const rec=rows[0].v,L=$("ladder");L.innerHTML="";
+  rows.forEach((r,i)=>L.insertAdjacentHTML("beforeend",`<div class="r ${r.cls||""}"><span class="k">${r.k}</span><div class="bar"><i style="width:${(rec/r.v*100).toFixed(1)}%;animation-delay:${i*0.1}s"></i></div><span class="v num">${fmt(r.v)} <small>${r.n}</small></span></div>`));
+  L.querySelectorAll(".r.you .bar i").forEach(b=>b.style.background=you.c);
 }
 function table(s){
   $("classNote").textContent=s.isRace?"Finishing order. Gap is time or laps behind the winner; best lap is each driver's fastest of the race.":"Ordered by best lap, as the timing system classifies open sessions.";
   const t=$("results");t.innerHTML=`<tr><th>Pos</th><th>Kart</th><th>Driver</th><th class="r">Laps</th><th class="r">Best</th><th class="r">Gap</th><th class="r">Avg</th></tr>`+
-   s.D.map((d,i)=>`<tr class="${d.you?"you":""}"><td class="num"><b>${i+1}</b></td><td class="num">${d.k}</td><td><i style="background:${d.c}"></i>${d.n}</td><td class="r num">${d.l.length}</td><td class="r num" style="color:${d.best===s.D.reduce((a,b)=>a<b.best?a:b.best,99)?"var(--purple)":"inherit"}">${fmt(d.best)}</td><td class="r num">${d.gap}</td><td class="r num">${d.avg.toFixed(3)}</td></tr>`).join("");
+   s.D.map((d,i)=>`<tr class="${d.you?"you":""}" data-n="${d.n}"><td class="num"><b>${i+1}</b></td><td class="num">${d.k}</td><td><i style="background:${d.c}"></i>${d.n}</td><td class="r num">${d.l.length}</td><td class="r num" style="color:${d.best===s.D.reduce((a,b)=>a<b.best?a:b.best,99)?"var(--purple)":"inherit"}">${fmt(d.best)}</td><td class="r num">${d.gap}</td><td class="r num">${d.avg.toFixed(3)}</td></tr>`).join("");
+  t.querySelectorAll("tr[data-n]").forEach(r=>r.onclick=()=>setFocus(r.dataset.n));
 }
 /* tabs + hash routing */
-const tabs=$("tabs");ORDER.forEach(k=>{const b=document.createElement("button");b.className="tab";b.dataset.key=k;b.innerHTML=`${S[k].tab} <small class="num">${fmt(Math.min(...S[k].laps.EINFACHDEEKS))}</small>`;b.onclick=()=>{location.hash=k};tabs.appendChild(b)});
+const tabs=$("tabs");ORDER.forEach((k,i)=>{const b=document.createElement("button");b.className="tab";b.dataset.key=k;b.innerHTML=`<span class="st">0${i+1} · ${S[k].label} · ${S[k].time}</span><span class="nm">${S[k].tab}</span><span class="bl"><b class="num">${fmt(Math.min(...S[k].laps[ME]))}</b> ${k==="race"?"fastest lap · win by 23.5 s":k==="qualifying"?"pole · +0.550 to P2":"best lap · P1"}</span>`;b.onclick=()=>{location.hash=k};tabs.appendChild(b)});
+const ds=$("drivers");Object.keys(COL).forEach(n=>{const c=document.createElement("button");c.className="dchip";c.dataset.n=n;c.innerHTML=`<i style="background:${COL[n]}"></i>${n}`;c.onclick=()=>setFocus(n);ds.appendChild(c)});
+setFocus(ME);
 function route(){const k=location.hash.replace("#","");render(S[k]?k:"practice")}
 addEventListener("hashchange",route);route();
 </script>
